@@ -38,6 +38,12 @@ viability analysis simulator.
 
    Use `--help` to list all available arguments.
 
+   Alternatively, supply parameters in a YAML file:
+
+   ```bash
+   python main.py --config example_params.yaml
+   ```
+
 4. **Generate plots**
 
    Specify `--plot-dir` to save population trajectory and extinction

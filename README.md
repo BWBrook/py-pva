@@ -57,6 +57,16 @@ See `python main.py --help` for a full list of options, including how
 to customise survival and fertility rates, initial populations and
 noise settings.
 
+Parameters can also be provided in a YAML file using the `--config`
+option:
+
+```bash
+python main.py --config example_params.yaml
+```
+
+The repository includes `example_params.yaml` with the default values as
+a starting point.
+
 ## Testing
 
 To run the tests with `pytest`, install the dependencies and execute:
