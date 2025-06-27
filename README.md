@@ -38,8 +38,8 @@ source .venv/bin/activate
 ```
 
 The bootstrap script installs dependencies listed in
-`requirements.txt` and produces a `requirements.lock` file with
-pinned versions.
+`requirements.txt` using `uv pip` and produces a `requirements.lock`
+file with pinned versions via `uv pip freeze`.
 
 ## Usage
 
