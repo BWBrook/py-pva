@@ -6,7 +6,8 @@ viability analysis simulator.
 1. **Setup the environment**
 
    Run the bootstrap script to create a virtual environment and install
-   dependencies:
+   dependencies. It also pins the exact package versions to
+   `requirements.lock`:
 
    ```bash
    bash bootstrap_env.sh
