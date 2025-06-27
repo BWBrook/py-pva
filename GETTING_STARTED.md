@@ -5,13 +5,7 @@ viability analysis simulator.
 
 1. **Setup the environment**
 
-   Run the bootstrap script to create a virtual environment and install
-   codex/create-and-version-control-requirements
-   dependencies. It also pins the exact package versions to
-   `requirements.lock`:
-=======
-   dependencies using `uv pip`:
-    main
+   Run the bootstrap script to create a virtual environment and install dependencies using `uv pip`. It also pins the exact package versions to `requirements.lock`:
 
    ```bash
    bash bootstrap_env.sh
