@@ -6,7 +6,7 @@ viability analysis simulator.
 1. **Setup the environment**
 
    Run the bootstrap script to create a virtual environment and install
-   dependencies:
+   dependencies using `uv pip`:
 
    ```bash
    bash bootstrap_env.sh
