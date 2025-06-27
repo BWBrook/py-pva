@@ -1,13 +1,15 @@
 """Command-line interface for the PVA simulator.
 
-This script parses command-line arguments to configure and run the
-population viability analysis simulation. Results are summarised and
-optionally saved to files. See README.md for examples.
+This script parses command-line arguments or a YAML configuration file to
+configure and run the population viability analysis simulation.
+Results are summarised and optionally saved to files. See README.md for
+examples.
 """
 
 import argparse
 import sys
 from typing import Optional
+import yaml
 import numpy as np
 
 from src.vital_rates import VitalRates
@@ -20,6 +22,7 @@ def parse_args(argv: Optional[list] = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description='Run a population viability analysis simulation with age structure and two sexes.'
     )
+    parser.add_argument('--config', type=str, default=None, help='YAML file with simulation parameters.')
     parser.add_argument('--years', type=int, default=100, help='Number of generations to simulate.')
     parser.add_argument('--n-sim', type=int, default=100, help='Number of simulation replicates.')
     parser.add_argument('--q-threshold', type=int, default=50, help='Quasi-extinction threshold (population size).')
@@ -38,6 +41,16 @@ def parse_args(argv: Optional[list] = None) -> argparse.Namespace:
     parser.add_argument('--male-fertility', type=str, default='0,0,0,0,0', help='Comma-separated male fertility rates.')
     parser.add_argument('--initial-females', type=str, default='10,10,0,0,0', help='Initial female counts per age class.')
     parser.add_argument('--initial-males', type=str, default='10,10,0,0,0', help='Initial male counts per age class.')
+    # First parse only known args to get config file
+    args, remaining = parser.parse_known_args(argv)
+    if args.config:
+        with open(args.config, 'r') as fh:
+            config_data = yaml.safe_load(fh) or {}
+        for k, v in config_data.items():
+            if isinstance(v, list):
+                config_data[k] = ','.join(str(x) for x in v)
+        parser.set_defaults(**config_data)
+    # Now parse fully with potential overrides from CLI
     return parser.parse_args(argv)
 
 
