@@ -114,9 +114,11 @@ class Population:
         else:
             n_female_births = 0
             n_male_births = 0
-        # Age zero individuals are new births
-        new_f[0] = n_female_births
-        new_m[0] = n_male_births
+        # Age zero individuals are new births. In a single age-class model the
+        # survivors from the last step are also stored in index 0, so births
+        # need to be added rather than overwriting the existing counts.
+        new_f[0] += n_female_births
+        new_m[0] += n_male_births
 
         # Apply catastrophe
         if catastrophe is not None:
