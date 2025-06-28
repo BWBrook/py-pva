@@ -54,7 +54,11 @@ def test_catastrophe_deterministic() -> None:
     cat = Catastrophe(probability=1.0, mortality_rate=0.5)
     pop = Population(initial_females.copy(), initial_males.copy())
     pop.advance_generation(vr, catastrophe=cat, demo_noise=False, env_noise=False)
-    assert pop.female[1] + pop.male[1] == 10
+    # The last age class is a plus-group so survivors from the previous
+    # age join those already in that class. With 20 individuals entering
+    # the catastrophe and a 50% mortality rate we expect 20 survivors in
+    # total (10 of each sex).
+    assert pop.female[1] + pop.male[1] == 20
 
 
 def test_carrying_capacity_deterministic() -> None:
