@@ -14,6 +14,7 @@ source .venv/bin/activate
 
 pip install --upgrade pip
 uv pip install -r requirements.txt
+# Regenerate the lock file to capture exact installed versions
 uv pip freeze > requirements.lock
 
 echo "Virtual environment created using $PYTHON_BIN."
